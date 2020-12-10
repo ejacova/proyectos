@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+
+
+	<h:outputStylesheet library="css" name="index.css" />
+
+</h:head>
+
+
+<h:body>
+
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary"> <a
+		class="navbar-brand" href="#">Quileia</a>
+	<div class="collapse navbar-collapse" id="navbarColor01">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item"><a class="nav-link" href="Index.jsf">Home
+			</a></li>
+			<li class="nav-item active"><a class="nav-link" href="Agente.jsf">Registrar
+					Agente de Transito</a></li>
+			<li class="nav-item"><a class="nav-link" href="Via.jsf">Registrar
+					Vías</a></li>
+			<li class="nav-item"><a class="nav-link" href="Historial.jsf">Historial
+					de Asignaciones</a></li>
+		</ul>
+	</div>
+	</nav>
+	<div class="progress">
+  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+</div>
+	<h:form id="form">
+		<p:outputPanel id="categorias">
+			<p:dataTable value="#{crearAgenteController.agentes}"
+				var="categoria" id="categoriasTable" editable="true" >
+				<f:facet name="header">
+           		 Modificar Agentes
+       			</f:facet>
+
+				<p:column headerText="Id de Agente" >
+					<h:outputText value="#{categoria.codigoAgente}" />
+				</p:column>
+
+				<p:column headerText="Nombre del Agente" >
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{categoria.nombre}" />
+					</f:facet>
+					<f:facet name="input">
+					<p:inputText value="#{categoria.nombre}" />
+					</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="Años de Experiencia" >
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{categoria.añosExperiencia}" />
+					</f:facet>
+					<f:facet name="input">
+					<p:inputText value="#{categoria.añosExperiencia}" />
+					</f:facet> />
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column headerText="Codigo de Secretaría" >
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{categoria.codigoSecretaria}" />
+					</f:facet>
+					<f:facet name="input">
+					<p:inputText value="#{categoria.codigoSecretaria}" />
+					</f:facet> />
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column headerText="Via Asignada" >
+					<h:outputText value="#{categoria.via.tipo} #{categoria.via.calleCarrera} #{categoria.via.numero}" />
+					
+				</p:column>
+				
+				<p:ajax event="rowEdit" listener="#{crearAgenteController.modificarCategoria(categoria)}" />
+				
+				<p:column>
+          		  <p:rowEditor />
+       			 </p:column>
+		
+			</p:dataTable>
+		</p:outputPanel>
+	</h:form>
+
+	
+
+
+
+
+
+
+</h:body>
+</html>
